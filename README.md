@@ -3,17 +3,17 @@ Honors Senior Project at GVSU winter 2020
 
 
 Tooling:
-###Database: 
+### Database: 
 MongoDB
 
-###Backend:
+### Backend:
 Node JS
 
-###Communication:
+### Communication:
 Express
 
-###Front End:
+### Front End:
 React JS
 
-###Component Styling:
+### Component Styling:
 Material UI
