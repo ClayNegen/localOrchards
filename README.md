@@ -26,6 +26,12 @@ Material UI
 
 ## Wire Frames
 
-![](./application/wire frames/Title Page 1.png)
-![](./application/wire frames/Title Page 2.png)
-![](./application/wire frames/Title Page 3.png)
+![](./application/WireFrames/TitlePage1.png)
+
+#
+
+![](./application/WireFrames/TitlePage2.png)
+
+#
+
+![](./application/WireFrames/TitlePage3.png)
