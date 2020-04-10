@@ -11,10 +11,7 @@ const data = [
     website: "upickfarms.com",
     description: "description",
     products: ["apples", "pumpkins"],
-    itemData: {
-      title: "Upick Famrs",
-      hours: "8 to 5",
-      img: "./public/apples/1.jpg"
-    }
+    title: "Upick Famrs",
+    img: "./public/apples/1.jpg"
   }
 ];
