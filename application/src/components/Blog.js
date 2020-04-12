@@ -16,25 +16,16 @@ import post1 from "./blog-post.1.md";
 import post2 from "./blog-post.2.md";
 import post3 from "./blog-post.3.md";
 
-let link =
-  "https://github.com/ClayNegen/localOrchards/raw/master/application/WireFrames/TitlePage1.png";
-
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
     marginTop: theme.spacing(3),
-  },
-  backgroundP: {
-    backgroundImage: `url(${link})`,
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
   },
 }));
 
 const sections = [
   { title: "Posts", url: "#" },
   { title: "Activity", url: "#" },
-  { title: "Maps", url: "#" },
+  { title: "Maps", url: "/maps" },
   { title: "Profile", url: "#" },
 ];
 
@@ -64,6 +55,14 @@ const featuredPosts = [
     image: "https://source.unsplash.com/random",
     imageText: "Image Text",
   },
+  {
+    title: "Post title 2",
+    date: "Nov 1",
+    description:
+      "This is a wider card with supporting text below as a natural lead-in to additional content.",
+    image: "https://source.unsplash.com/random",
+    imageText: "Image Text",
+  },
 ];
 
 const posts = [post1, post2, post3];
@@ -85,11 +84,7 @@ const sidebar = {
     { title: "May 1999", url: "#" },
     { title: "April 1999", url: "#" },
   ],
-  social: [
-    { name: "GitHub", icon: GitHubIcon },
-    { name: "Twitter", icon: TwitterIcon },
-    { name: "Facebook", icon: FacebookIcon },
-  ],
+  social: [{ name: "GitHub", icon: GitHubIcon }],
 };
 
 export default function Blog() {
@@ -97,9 +92,8 @@ export default function Blog() {
 
   return (
     <React.Fragment>
-      <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Blog" sections={sections} />
+        <Header title="Local Orchards" sections={sections} />
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>

@@ -42,10 +42,15 @@ export default function Sidebar(props) {
         </Link>
       ))}
       <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
-        Social
+        Source Code
       </Typography>
       {social.map((network) => (
-        <Link display="block" variant="body1" href="#" key={network}>
+        <Link
+          display="block"
+          variant="body1"
+          href="https://github.com/ClayNegen/localOrchards"
+          key={network}
+        >
           <Grid container direction="row" spacing={1} alignItems="center">
             <Grid item>
               <network.icon />
