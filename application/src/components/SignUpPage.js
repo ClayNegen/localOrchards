@@ -5,24 +5,25 @@ import Header from "./Header";
 import Footer from "./Footer";
 import "./components.css";
 import Typography from "@material-ui/core/Typography";
+import BusinessFrom from "./BusinessForm";
 
 const sections = [
-  { title: "U-Pick", url: "/upick" },
-  { title: "Activity", url: "/activity" },
+  { title: "Posts", url: "#" },
+  { title: "Activity", url: "/blog" },
   { title: "Maps", url: "/maps" },
-  { title: "Profile", url: "/profile" },
+  { title: "Profile", url: "#" },
 ];
 
-export default function Home() {
+export default function SignUpPage() {
   return (
-    <div class="Home">
+    <div className="">
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="lg">
           <Header title="Local Orchards" sections={sections} />
           <main>
-            <div class="cover">
-              <Typography class="middle">U-Pick Apples Near Me</Typography>
+            <div>
+              <BusinessFrom />
             </div>
           </main>
         </Container>

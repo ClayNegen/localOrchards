@@ -5,6 +5,7 @@ const data = [
     business: "U-Pick Farms",
     address: "111 Amazing Street",
     city: "The Big Apple",
+    state: "MI",
     country: "USA",
     hoursFrom: "8am",
     hoursTo: "5pm",
@@ -12,6 +13,6 @@ const data = [
     description: "description",
     products: ["apples", "pumpkins"],
     title: "Upick Famrs",
-    img: "./public/apples/1.jpg"
-  }
+    img: "./public/apples/1.jpg",
+  },
 ];

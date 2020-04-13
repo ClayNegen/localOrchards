@@ -15,6 +15,8 @@ import Footer from "./Footer";
 import post1 from "./blog-post.1.md";
 import post2 from "./blog-post.2.md";
 import post3 from "./blog-post.3.md";
+import Business from "./Business";
+import db from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -30,12 +32,11 @@ const sections = [
 ];
 
 const mainFeaturedPost = {
-  title: "Title of a longer featured blog post",
+  title: "U-Pick Apples Near Me",
   description:
-    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-  image: "https://source.unsplash.com/user/rynocerontem",
+    "Find out which businesses near you have U-Pick apples available, click on a business to see location, time, and details",
+  image: "https://source.unsplash.com/random/?apples",
   imgText: "main image description",
-  linkText: "Continue reading…",
 };
 
 const featuredPosts = [
@@ -65,30 +66,21 @@ const featuredPosts = [
   },
 ];
 
-const posts = [post1, post2, post3];
-
-const sidebar = {
-  title: "About",
-  description:
-    "Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.",
-  archives: [
-    { title: "March 2020", url: "#" },
-    { title: "February 2020", url: "#" },
-    { title: "January 2020", url: "#" },
-    { title: "November 1999", url: "#" },
-    { title: "October 1999", url: "#" },
-    { title: "September 1999", url: "#" },
-    { title: "August 1999", url: "#" },
-    { title: "July 1999", url: "#" },
-    { title: "June 1999", url: "#" },
-    { title: "May 1999", url: "#" },
-    { title: "April 1999", url: "#" },
-  ],
-  social: [{ name: "GitHub", icon: GitHubIcon }],
-};
-
 export default function Blog() {
   const classes = useStyles();
+  const [posts, setPosts] = React.useState([]);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      db.collection("users").onSnapshot(function (data) {
+        setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      });
+    };
+
+    fetchData();
+  }, []);
+
+  console.log("Posts", posts);
 
   return (
     <React.Fragment>
@@ -97,18 +89,9 @@ export default function Blog() {
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
-            {featuredPosts.map((post) => (
-              <FeaturedPost key={post.title} post={post} />
+            {posts.map((post) => (
+              <Business key={post.title} post={post} />
             ))}
-          </Grid>
-          <Grid container spacing={5} className={classes.mainGrid}>
-            <Main title="From the firehose" posts={posts} />
-            <Sidebar
-              title={sidebar.title}
-              description={sidebar.description}
-              archives={sidebar.archives}
-              social={sidebar.social}
-            />
           </Grid>
         </main>
       </Container>

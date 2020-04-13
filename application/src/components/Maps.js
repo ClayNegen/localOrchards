@@ -10,6 +10,8 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
+import { Link } from "react-router-dom";
+import db from "../firebase";
 
 const sections = [
   { title: "Posts", url: "/blog" },
@@ -19,6 +21,20 @@ const sections = [
 ];
 
 export default function Maps() {
+  const [places, setPlaces] = React.useState([]);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      db.collection("users").onSnapshot(function (data) {
+        setPlaces(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      });
+    };
+
+    fetchData();
+  }, []);
+
+  console.log("Places: ", places);
+
   return (
     <div className="Maps">
       <React.Fragment>
@@ -27,22 +43,14 @@ export default function Maps() {
           <main>
             <Card>
               <GoogleMaps />
-              <CardActionArea>
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Lizard{" "}
-                  </Typography>{" "}
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6, 000 species, ranging across all continents except
-                    Antarctica{" "}
-                  </Typography>{" "}
-                </CardContent>{" "}
-              </CardActionArea>{" "}
+              {places.map((item, index) => (
+                <Place
+                  key={index}
+                  title={item.business_title}
+                  url={item.website}
+                  des={item.description}
+                />
+              ))}
             </Card>
           </main>
         </Container>
@@ -52,5 +60,20 @@ export default function Maps() {
         />
       </React.Fragment>
     </div>
+  );
+}
+
+function Place(props) {
+  return (
+    <CardActionArea>
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="h2"></Typography>
+        {props.title}
+        <Typography variant="body2" color="textSecondary" component="p">
+          {props.des}
+        </Typography>
+        <Link to={props.url}>{props.url}</Link>
+      </CardContent>
+    </CardActionArea>
   );
 }

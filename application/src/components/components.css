@@ -13,6 +13,13 @@
     color: white;
 }
 
+.SignUp {
+    background: url("./apples/3.jpg") no-repeat;
+    background-size: cover;
+    min-width: 100%;
+    min-height: 100%;
+}
+
 .cover {
     height: 100vh;
 }

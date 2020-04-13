@@ -7,6 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
+import { Link as RLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -49,7 +50,12 @@ export default function Header(props) {
           <SearchIcon />
         </IconButton>
         <Button variant="outlined" size="small">
-          Sign up
+          <RLink
+            to="/signup"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            Sign Up
+          </RLink>
         </Button>
       </Toolbar>
       <Toolbar
