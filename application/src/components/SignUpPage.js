@@ -15,7 +15,7 @@ const sections = [
 
 export default function SignUpPage() {
   return (
-    <div className="">
+    <div class="SignUp">
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="lg">

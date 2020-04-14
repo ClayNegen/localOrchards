@@ -48,22 +48,25 @@ export default function Upick() {
   console.log("Posts", posts);
 
   return (
-    <React.Fragment>
-      <Container maxWidth="lg">
-        <Header title="Local Orchards" sections={sections} />
-        <main>
-          <MainFeaturedPost post={mainFeaturedPost} />
-          <Grid container spacing={2}>
-            {posts.map((post, index) => (
-              <Business key={index} post={post} />
-            ))}
-          </Grid>
-        </main>
-      </Container>
-      <Footer
-        title="Footer"
-        description="Something here to give the footer a purpose!"
-      />
-    </React.Fragment>
+    <div class="Upick">
+      <React.Fragment>
+        <CssBaseline />
+        <Container maxWidth="lg">
+          <Header title="Local Orchards" sections={sections} />
+          <main>
+            <MainFeaturedPost post={mainFeaturedPost} />
+            <Grid container spacing={2}>
+              {posts.map((post, index) => (
+                <Business key={index} post={post} />
+              ))}
+            </Grid>
+          </main>
+        </Container>
+        <Footer
+          title="Footer"
+          description="Something here to give the footer a purpose!"
+        />
+      </React.Fragment>
+    </div>
   );
 }

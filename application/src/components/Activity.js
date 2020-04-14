@@ -37,32 +37,35 @@ export default function Blog() {
   React.useEffect(() => {
     const fetchData = async () => {
       db.collection("posts").onSnapshot(function (data) {
-        setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        let arr = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+        arr.sort((a, b) => b.sortBy - a.sortBy);
+        console.log("Sorted Array: ", arr);
+        setPosts(arr);
       });
     };
 
     fetchData();
   }, []);
 
-  console.log("Posts", posts);
-
   return (
-    <React.Fragment>
-      <Container maxWidth="lg">
-        <Header title="Local Orchards" sections={sections} />
-        <main>
-          <MainFeaturedPost post={mainFeaturedPost} />
-          <Grid container spacing={4}>
-            {posts.map((post) => (
-              <Post key={post.title} post={post} />
-            ))}
-          </Grid>
-        </main>
-      </Container>
-      <Footer
-        title="Footer"
-        description="Something here to give the footer a purpose!"
-      />
-    </React.Fragment>
+    <div class="Activity">
+      <React.Fragment>
+        <Container maxWidth="lg">
+          <Header title="Local Orchards" sections={sections} />
+          <main>
+            <MainFeaturedPost post={mainFeaturedPost} />
+            <Grid container spacing={4}>
+              {posts.map((post) => (
+                <Post key={post.title} post={post} />
+              ))}
+            </Grid>
+          </main>
+        </Container>
+        <Footer
+          title="Footer"
+          description="Something here to give the footer a purpose!"
+        />
+      </React.Fragment>
+    </div>
   );
 }

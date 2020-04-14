@@ -9,6 +9,7 @@ import { Button } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import Post from "./Post";
 
 const sections = [
   { title: "U-Pick", url: "/upick" },
@@ -22,20 +23,27 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     marginTop: theme.spacing(3),
   },
+  submit: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 export default function Profile() {
-  const id = "y8BdSU9uzH3T9Yriw1tF";
+  const id = "ETuJfpm1TinVG6bQ4c3x";
   const classes = useStyles();
   const date = new Date();
   const [post, setPost] = React.useState({
     user: id,
     date: date.toDateString(),
+    sortBy: date.getTime(),
   });
   const [currentUser, setCurrentUser] = React.useState({});
+  const [posts, setPosts] = React.useState([]);
 
   const onSubmit = (event) => {
     event.preventDefault();
+    document.getElementById("post").value = "";
     if (post.content) {
       console.log("You are submitting " + post);
       db.collection("posts").add(post);
@@ -51,20 +59,31 @@ export default function Profile() {
   };
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      db.collection("users")
-        .doc(id)
-        .get()
-        .then((doc) => {
-          setCurrentUser(doc.data());
-          setPost({ ...post, business: doc.data().business_title });
-        });
-    };
     fetchData();
+    fetchPosts();
   }, []);
 
+  const fetchData = async () => {
+    db.collection("users")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        setCurrentUser(doc.data());
+        setPost({ ...post, business: doc.data().business_title });
+      });
+  };
+
+  const fetchPosts = async () => {
+    db.collection("posts").onSnapshot(function (data) {
+      let id = "ETuJfpm1TinVG6bQ4c3x";
+      let arr = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      let p = arr.filter((post) => post.user === id);
+      setPosts(p);
+    });
+  };
+
   return (
-    <div>
+    <div class="Profile">
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="lg">
@@ -85,7 +104,6 @@ export default function Profile() {
                   id="post"
                   label="Write a post..."
                   name="content"
-                  autoComplete="post"
                   onChange={myChangeHandler}
                 />
               </Grid>
@@ -100,6 +118,12 @@ export default function Profile() {
               Submit Post
             </Button>
           </form>
+          <h1>Your Posts</h1>
+          <Grid container spacing={4}>
+            {posts.map((post) => (
+              <Post key={post.title} post={post} />
+            ))}
+          </Grid>
         </Container>
         <Footer
           title="Footer"
@@ -132,6 +156,7 @@ function BusinessList(props) {
       <p>
         Hours: {props.item.hours_from} - {props.item.hours_to}
       </p>
+      <p>Webiste: {props.item.website}</p>
       <p>Description: {props.item.description}</p>
     </div>
   );

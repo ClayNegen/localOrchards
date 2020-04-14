@@ -1,6 +1,7 @@
 import React from "react";
 import { Credentials } from "../config";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -18,9 +19,17 @@ const sections = [
   { title: "Maps", url: "/maps" },
   { title: "Profile", url: "/profile" },
 ];
+
+const useStyles = makeStyles((theme) => ({
+  map: {
+    marginBottom: theme.spacing(2),
+  },
+}));
+
 const GOOGLE_MAP_API_KEY = Credentials[0].GoogleMapKey;
 
 export default function Maps() {
+  const classes = useStyles();
   const [lat, setLat] = React.useState(42.963421);
   const [lng, setLng] = React.useState(-85.68013);
   const [places, setPlaces] = React.useState([]);
@@ -50,27 +59,26 @@ export default function Maps() {
       .catch((error) => console.log("Error: ", error));
   };
 
-  const GoogooMap = lat ? <GoogleMaps lat={lat} lng={lng} /> : null;
-
   return (
     <div className="Maps">
       <React.Fragment>
+        <CssBaseline />
         <Container maxWidth="lg">
           <Header title="Local Orchards" sections={sections} />
           <main>
-            <Card>
-              {GoogooMap}
-              {places.map((item, index) => (
-                <Place
-                  key={index}
-                  title={item.business_title}
-                  url={item.website}
-                  des={item.description}
-                  value={item.address}
-                  callback={() => clicked(item)}
-                />
-              ))}
+            <Card className={classes.map}>
+              <GoogleMaps lat={lat} lng={lng} />
             </Card>
+            {places.map((item, index) => (
+              <Place
+                key={index}
+                title={item.business_title}
+                url={item.website}
+                des={item.description}
+                value={item.address}
+                callback={() => clicked(item)}
+              />
+            ))}
           </main>
         </Container>
         <Footer
@@ -84,15 +92,17 @@ export default function Maps() {
 
 function Place(props) {
   return (
-    <CardActionArea onClick={props.callback}>
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="h2"></Typography>
-        {props.title}
-        <Typography variant="body2" color="textSecondary" component="p">
-          {props.des}
-        </Typography>
-        <a href={props.url}>{props.url}</a>
-      </CardContent>
-    </CardActionArea>
+    <Card>
+      <CardActionArea onClick={props.callback}>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2"></Typography>
+          {props.title}
+          <Typography variant="body2" color="textSecondary" component="p">
+            {props.des}
+          </Typography>
+          <a href={props.url}>{props.url}</a>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 }

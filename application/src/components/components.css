@@ -1,8 +1,18 @@
+.Overlay {
+    position: "absolute";
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .3);
+}
+
 .Maps {
-    background: url("./apples/1.jpg") no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./apples/1.jpg') no-repeat;
     background-size: cover;
     min-width: 100%;
     min-height: 100%;
+    color: white;
 }
 
 .Home {
@@ -13,11 +23,36 @@
     color: white;
 }
 
-.SignUp {
-    background: url("./apples/3.jpg") no-repeat;
+.Upick {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('./apples/6.jpg') no-repeat;
     background-size: cover;
     min-width: 100%;
     min-height: 100%;
+    color: white;
+}
+
+.Activity {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('./apples/8.jpg') no-repeat;
+    background-size: cover;
+    min-width: 100%;
+    min-height: 100%;
+    color: white;
+}
+
+.Profile {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./apples/10.jpg') no-repeat;
+    background-size: cover;
+    min-width: 100%;
+    min-height: 100%;
+    color: white;
+}
+
+.SignUp {
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./apples/11.jpg') no-repeat;
+    background-size: cover;
+    min-width: 100%;
+    min-height: 100%;
+    color: white;
 }
 
 .cover {

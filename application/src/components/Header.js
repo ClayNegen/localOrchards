@@ -33,7 +33,7 @@ export default function Header(props) {
   return (
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
-        <Button size="small" href="/">
+        <Button size="small" href="/" style={{ color: "white" }}>
           Home
         </Button>
         <Typography
@@ -46,13 +46,10 @@ export default function Header(props) {
         >
           {title}
         </Typography>
-        <IconButton>
-          <SearchIcon />
-        </IconButton>
-        <Button variant="outlined" size="small">
+        <Button size="small">
           <RLink
             to="/signup"
-            style={{ textDecoration: "none", color: "inherit" }}
+            style={{ textDecoration: "none", color: "white" }}
           >
             Sign Up
           </RLink>
