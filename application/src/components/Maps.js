@@ -8,16 +8,14 @@ import GoogleMaps from "./GoogleMaps";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
 import db from "../firebase";
 
 const sections = [
-  { title: "Posts", url: "/blog" },
-  { title: "Activity", url: "#" },
+  { title: "U-Pick", url: "/upick" },
+  { title: "Activity", url: "/activity" },
   { title: "Maps", url: "/maps" },
-  { title: "Profile", url: "#" },
+  { title: "Profile", url: "/profile" },
 ];
 
 export default function Maps() {
@@ -35,10 +33,7 @@ export default function Maps() {
     fetchData();
   }, []);
 
-  console.log("Places: ", places);
-
   const clicked = (item) => {
-    console.log("clicked: ", item);
     let l = [
       {
         address: item.address,
@@ -47,11 +42,9 @@ export default function Maps() {
       },
     ];
     setLocation(l);
-    console.log("LocoLoco: ", l);
   };
 
   const GoogooMap = location ? <GoogleMaps location={location[0]} /> : null;
-  console.log("Location: ", location);
 
   return (
     <div className="Maps">

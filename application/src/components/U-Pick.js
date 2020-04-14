@@ -3,18 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import TwitterIcon from "@material-ui/icons/Twitter";
 import Header from "./Header";
 import MainFeaturedPost from "./MainFeaturedPost";
-import FeaturedPost from "./FeaturedPost";
-import Main from "./Main";
-import Sidebar from "./Sidebar";
 import Footer from "./Footer";
-import post1 from "./blog-post.1.md";
-import post2 from "./blog-post.2.md";
-import post3 from "./blog-post.3.md";
 import Business from "./Business";
 import db from "../firebase";
 
@@ -25,10 +16,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const sections = [
-  { title: "Posts", url: "#" },
-  { title: "Activity", url: "/blog" },
+  { title: "U-Pick", url: "/upick" },
+  { title: "Activity", url: "/activity" },
   { title: "Maps", url: "/maps" },
-  { title: "Profile", url: "#" },
+  { title: "Profile", url: "/profile" },
 ];
 
 const mainFeaturedPost = {

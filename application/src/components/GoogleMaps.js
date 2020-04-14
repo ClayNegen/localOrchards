@@ -22,7 +22,6 @@ function GoogleMaps(props) {
   city = city.replace(/\s+/g, "+");
   let state = props.location.state;
   let loc = address + ",+" + city + ",+" + state;
-  console.log("loc, ", loc);
   let link = `https://maps.googleapis.com/maps/api/geocode/json?address=${loc}&key=${GOOGLE_MAP_API_KEY}`;
 
   React.useEffect(() => {
@@ -31,7 +30,6 @@ function GoogleMaps(props) {
       .then((response) => {
         setLat(response.results[0].geometry.location.lat);
         setLng(response.results[0].geometry.location.lng);
-        console.log("Set: ", response.results[0].geometry.location);
       })
       .catch((error) => console.log("Error: ", error));
   });
@@ -51,7 +49,6 @@ function GoogleMaps(props) {
       },
     });
 
-  console.log("Lat: ", lat, "lng: ", lng);
   const createMarker = () =>
     new window.google.maps.Marker({
       position: { lat: lat, lng: lng },

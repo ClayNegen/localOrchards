@@ -3,24 +3,25 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect,
 } from "react-router-dom";
-import Blog from "./components/Blog";
 import Maps from "./components/Maps";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
 import UPick from "./components/U-Pick";
 import Activity from "./components/Activity";
-import BusinessForm from "./components/BusinessForm";
 import PageNotFound from "./components/PageNotFound";
 import SignUpPage from "./components/SignUpPage";
+import Orchard from "./components/Orchard";
 
 export default function App() {
   return (
     <Router>
       <div>
         <Switch>
+          <Route path="/orchard">
+            <Orchard />
+          </Route>
           <Route path="/upick">
             <UPick />
           </Route>
@@ -32,9 +33,6 @@ export default function App() {
           </Route>
           <Route path="/signup">
             <SignUpPage />
-          </Route>
-          <Route path="/blog">
-            <Blog />
           </Route>
           <Route path="/maps">
             <Maps />

@@ -45,7 +45,7 @@ export default function FeaturedPost(props) {
           <Hidden xsDown>
             <CardMedia
               className={classes.cardMedia}
-              image="./apples/1.jpg"
+              image="https://source.unsplash.com/random/?apples"
               title={post.imageTitle}
             />
           </Hidden>

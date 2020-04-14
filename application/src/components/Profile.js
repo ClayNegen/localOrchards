@@ -4,8 +4,6 @@ import Container from "@material-ui/core/Container";
 import Header from "./Header";
 import Footer from "./Footer";
 import "./components.css";
-import Typography from "@material-ui/core/Typography";
-import { checkPropTypes } from "prop-types";
 import db from "../firebase";
 import { Button } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
@@ -13,10 +11,10 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 
 const sections = [
-  { title: "Posts", url: "#" },
-  { title: "Activity", url: "/blog" },
+  { title: "U-Pick", url: "/upick" },
+  { title: "Activity", url: "/activity" },
   { title: "Maps", url: "/maps" },
-  { title: "Profile", url: "#" },
+  { title: "Profile", url: "/profile" },
 ];
 
 const useStyles = makeStyles((theme) => ({
