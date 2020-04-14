@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from "react";
+import { Credentials } from "../config";
 
 // Variables
-const GOOGLE_MAP_API_KEY = "KEY";
+const GOOGLE_MAP_API_KEY = Credentials[0].GoogleMapKey;
+
 const myLocation = {
   //Grand Rapids
   lat: 42.9634,
@@ -14,25 +16,29 @@ const mapStyles = {
 };
 
 function GoogleMaps(props) {
-  const [lat, setLat] = React.useState("");
-  const [lng, setLng] = React.useState("");
-  let address = props.location.address;
-  address = address.replace(/\s+/g, "+");
-  let city = props.location.city;
-  city = city.replace(/\s+/g, "+");
-  let state = props.location.state;
-  let loc = address + ",+" + city + ",+" + state;
-  let link = `https://maps.googleapis.com/maps/api/geocode/json?address=${loc}&key=${GOOGLE_MAP_API_KEY}`;
+  // const [lat, setLat] = React.useState("");
+  // const [lng, setLng] = React.useState("");
 
-  React.useEffect(() => {
-    fetch(link)
-      .then((res) => res.json())
-      .then((response) => {
-        setLat(response.results[0].geometry.location.lat);
-        setLng(response.results[0].geometry.location.lng);
-      })
-      .catch((error) => console.log("Error: ", error));
-  });
+  // //Configure API call
+  // let address = props.location.address;
+  // address = address.replace(/\s+/g, "+");
+  // let city = props.location.city;
+  // city = city.replace(/\s+/g, "+");
+  // let state = props.location.state;
+  // let loc = address + ",+" + city + ",+" + state;
+  // let link = `https://maps.googleapis.com/maps/api/geocode/json?address=${loc}&key=${GOOGLE_MAP_API_KEY}`;
+
+  // React.useEffect(() => {
+  //   fetch(link)
+  //     .then((res) => res.json())
+  //     .then((response) => {
+  //       setLat(response.results[0].geometry.location.lat);
+  //       setLng(response.results[0].geometry.location.lng);
+  //     })
+  //     .catch((error) => console.log("Error: ", error));
+  // });
+  const lat = props.lat;
+  const lng = props.lng;
 
   // refs
   const googleMapRef = React.createRef();

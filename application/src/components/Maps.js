@@ -1,4 +1,5 @@
 import React from "react";
+import { Credentials } from "../config";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Header from "./Header";
@@ -17,16 +18,17 @@ const sections = [
   { title: "Maps", url: "/maps" },
   { title: "Profile", url: "/profile" },
 ];
+const GOOGLE_MAP_API_KEY = Credentials[0].GoogleMapKey;
 
 export default function Maps() {
-  const [location, setLocation] = React.useState(null);
+  const [lat, setLat] = React.useState(42.963421);
+  const [lng, setLng] = React.useState(-85.68013);
   const [places, setPlaces] = React.useState([]);
 
   React.useEffect(() => {
     const fetchData = async () => {
       db.collection("users").onSnapshot(function (data) {
         setPlaces(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        setLocation(data.docs.map((doc) => ({ ...doc.data() })));
       });
     };
 
@@ -34,17 +36,21 @@ export default function Maps() {
   }, []);
 
   const clicked = (item) => {
-    let l = [
-      {
-        address: item.address,
-        city: item.city,
-        state: item.state,
-      },
-    ];
-    setLocation(l);
+    let address = item.address;
+    let city = item.city;
+    let state = item.state;
+    let loc = address + ",+" + city + ",+" + state;
+    let link = `https://maps.googleapis.com/maps/api/geocode/json?address=${loc}&key=${GOOGLE_MAP_API_KEY}`;
+    fetch(link)
+      .then((res) => res.json())
+      .then((response) => {
+        setLat(response.results[0].geometry.location.lat);
+        setLng(response.results[0].geometry.location.lng);
+      })
+      .catch((error) => console.log("Error: ", error));
   };
 
-  const GoogooMap = location ? <GoogleMaps location={location[0]} /> : null;
+  const GoogooMap = lat ? <GoogleMaps lat={lat} lng={lng} /> : null;
 
   return (
     <div className="Maps">

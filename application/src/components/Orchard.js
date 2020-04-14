@@ -6,6 +6,18 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import db from "../firebase";
+import Post from "./Post";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Container from "@material-ui/core/Container";
+import Header from "./Header";
+import Footer from "./Footer";
+
+const sections = [
+  { title: "U-Pick", url: "/upick" },
+  { title: "Activity", url: "/activity" },
+  { title: "Maps", url: "/maps" },
+  { title: "Profile", url: "/profile" },
+];
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
@@ -34,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(6),
       paddingRight: 0,
     },
+  },
+  header: {
+    marginLeft: "0.5em",
   },
 }));
 
@@ -76,6 +91,15 @@ function BigCard(props) {
             <Typography variant="h5" color="inherit" paragraph>
               {item.description}
             </Typography>
+            <Typography variant="h6" color="inherit" paragraph>
+              Visit us at...
+            </Typography>
+            <a
+              style={{ fontSize: "1.5rem", color: "white" }}
+              href={item.website}
+            >
+              {item.website}
+            </a>
           </div>
         </Grid>
       </Grid>
@@ -87,24 +111,56 @@ BigCard.propTypes = {
   post: PropTypes.object,
 };
 
-export default function Orchard() {
-  const id = "OQubaub4DVunHUDc75hg";
-  const [orchard, setOrchard] = React.useState({});
+export default function Orchard({ match }) {
+  const classes = useStyles();
+
   React.useEffect(() => {
-    const fetchData = async () => {
-      db.collection("users")
-        .doc(id)
-        .get()
-        .then((doc) => {
-          setOrchard(doc.data());
-        });
-    };
-    fetchData();
+    fetchOrchards();
+    fetchPosts();
   }, []);
+
+  const [orchard, setOrchard] = React.useState({});
+  const [posts, setPosts] = React.useState([]);
+
+  const fetchOrchards = async () => {
+    db.collection("users")
+      .doc(match.params.id)
+      .get()
+      .then((doc) => {
+        setOrchard(doc.data());
+      });
+  };
+
+  const fetchPosts = async () => {
+    db.collection("posts").onSnapshot(function (data) {
+      let id = match.params.id;
+      let arr = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      let p = arr.filter((post) => post.user === id);
+      setPosts(p);
+    });
+  };
 
   return (
     <div>
-      <BigCard item={orchard} />
+      <React.Fragment>
+        <CssBaseline />
+        <Container maxWidth="lg">
+          <Header title="Local Orchards" sections={sections} />
+          <main>
+            <BigCard item={orchard} />
+            <h1 className={classes.header}>Posts</h1>
+            <Grid container spacing={4}>
+              {posts.map((post, index) => (
+                <Post key={index} post={post} />
+              ))}
+            </Grid>
+          </main>
+        </Container>
+        <Footer
+          title="Footer"
+          description="Something here to give the footer a purpose!"
+        />
+      </React.Fragment>
     </div>
   );
 }

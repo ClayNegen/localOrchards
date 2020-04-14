@@ -26,24 +26,22 @@ export default function FeaturedPost(props) {
   const { post } = props;
 
   return (
-    <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href="#">
-        <Card className={classes.card}>
-          <div className={classes.cardDetails}>
-            <CardContent>
-              <Typography component="h2" variant="h5">
-                {post.business}
-              </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
-                {post.date}
-              </Typography>
-              <Typography variant="subtitle1" paragraph>
-                {post.content}
-              </Typography>
-            </CardContent>
-          </div>
-        </Card>
-      </CardActionArea>
+    <Grid item xs={12}>
+      <Card className={classes.card}>
+        <div className={classes.cardDetails}>
+          <CardContent>
+            <Typography component="h2" variant="h5">
+              {post.business}
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              {post.date}
+            </Typography>
+            <Typography variant="subtitle1" paragraph>
+              {post.content}
+            </Typography>
+          </CardContent>
+        </div>
+      </Card>
     </Grid>
   );
 }

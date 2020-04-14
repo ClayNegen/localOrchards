@@ -19,12 +19,10 @@ export default function App() {
     <Router>
       <div>
         <Switch>
-          <Route path="/orchard">
-            <Orchard />
-          </Route>
-          <Route path="/upick">
+          <Route exact path="/upick">
             <UPick />
           </Route>
+          <Route path="/upick/:id" component={Orchard} />
           <Route path="/activity">
             <Activity />
           </Route>

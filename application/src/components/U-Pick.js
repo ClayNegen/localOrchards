@@ -7,6 +7,7 @@ import Header from "./Header";
 import MainFeaturedPost from "./MainFeaturedPost";
 import Footer from "./Footer";
 import Business from "./Business";
+import { Link } from "react-router-dom";
 import db from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,34 +31,7 @@ const mainFeaturedPost = {
   imgText: "main image description",
 };
 
-const featuredPosts = [
-  {
-    title: "Featured post",
-    date: "Nov 12",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/user/rynocerontem",
-    imageText: "Image Text",
-  },
-  {
-    title: "Post title",
-    date: "Nov 11",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/user/rynocerontem",
-    imageText: "Image Text",
-  },
-  {
-    title: "Post title 2",
-    date: "Nov 1",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/user/rynocerontem",
-    imageText: "Image Text",
-  },
-];
-
-export default function Blog() {
+export default function Upick() {
   const classes = useStyles();
   const [posts, setPosts] = React.useState([]);
 
@@ -79,9 +53,9 @@ export default function Blog() {
         <Header title="Local Orchards" sections={sections} />
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
-          <Grid container spacing={4}>
-            {posts.map((post) => (
-              <Business key={post.title} post={post} />
+          <Grid container spacing={2}>
+            {posts.map((post, index) => (
+              <Business key={index} post={post} />
             ))}
           </Grid>
         </main>

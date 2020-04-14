@@ -1,9 +1,10 @@
+import { Credentials } from "./config";
 const firebase = require("firebase");
 // Required for side-effects
 require("firebase/firestore");
 
 const firebaseConfig = {
-  apiKey: "AIzaSyChSK6-n4-JMDvnFV61zRc8J-fh9cMbZTQ",
+  apiKey: Credentials[0].FireBaseKey,
   authDomain: "localorchards-62f89.firebaseapp.com",
   databaseURL: "https://localorchards-62f89.firebaseio.com",
   projectId: "localorchards-62f89",
