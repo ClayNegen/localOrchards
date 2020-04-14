@@ -130,7 +130,7 @@ function BusinessList(props) {
         {props.item.country}
       </p>
       <p>
-        Hours: {props.item.hours_from} {props.item.hours_to}
+        Hours: {props.item.hours_from} - {props.item.hours_to}
       </p>
       <p>Description: {props.item.description}</p>
     </div>

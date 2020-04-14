@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
 // Variables
-const GOOGLE_MAP_API_KEY = "AIzaSyA8I9ttWAFKaW7E8tZ9GC2ktb21PRAGmWk";
+const GOOGLE_MAP_API_KEY = "KEY";
 const myLocation = {
   //Grand Rapids
   lat: 42.9634,

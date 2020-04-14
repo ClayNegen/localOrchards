@@ -68,6 +68,12 @@ function BigCard(props) {
               {item.business_title}
             </Typography>
             <Typography variant="h5" color="inherit" paragraph>
+              Address: {item.address}, {item.city}, {item.state}, {item.country}
+            </Typography>
+            <Typography variant="h5" color="inherit" paragraph>
+              Hours: {item.hours_from} - {item.hours_to}
+            </Typography>
+            <Typography variant="h5" color="inherit" paragraph>
               {item.description}
             </Typography>
           </div>
@@ -82,7 +88,7 @@ BigCard.propTypes = {
 };
 
 export default function Orchard() {
-  const id = "y8BdSU9uzH3T9Yriw1tF";
+  const id = "OQubaub4DVunHUDc75hg";
   const [orchard, setOrchard] = React.useState({});
   React.useEffect(() => {
     const fetchData = async () => {
