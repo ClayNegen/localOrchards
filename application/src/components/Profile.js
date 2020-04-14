@@ -9,6 +9,7 @@ import { Button } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 import Post from "./Post";
 
 const sections = [
@@ -26,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2),
+  },
+  paper: {
+    backgroundColor: "white",
   },
 }));
 
@@ -95,19 +99,17 @@ export default function Profile() {
             <BusinessList item={currentUser} />
           </main>
           <form className={classes.form} onSubmit={onSubmit} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  type="text"
-                  fullWidth
-                  id="post"
-                  label="Write a post..."
-                  name="content"
-                  onChange={myChangeHandler}
-                />
-              </Grid>
-            </Grid>
+            <Paper className={classes.pape}>
+              <TextField
+                variant="outlined"
+                type="text"
+                fullWidth
+                id="post"
+                label="Write a post..."
+                name="content"
+                onChange={myChangeHandler}
+              />
+            </Paper>
             <Button
               type="submit"
               fullWidth
@@ -119,7 +121,7 @@ export default function Profile() {
             </Button>
           </form>
           <h1>Your Posts</h1>
-          <Grid container spacing={4}>
+          <Grid container spacing={2}>
             {posts.map((post) => (
               <Post key={post.title} post={post} />
             ))}

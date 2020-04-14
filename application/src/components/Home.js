@@ -21,9 +21,7 @@ export default function Home() {
         <Container maxWidth="lg">
           <Header title="Local Orchards" sections={sections} />
           <main>
-            <div class="cover">
-              <Typography class="middle">U-Pick Apples Near Me</Typography>
-            </div>
+            <div class="cover"></div>
           </main>
         </Container>
         <Footer

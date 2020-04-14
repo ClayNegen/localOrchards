@@ -48,7 +48,7 @@
 }
 
 .SignUp {
-    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./apples/11.jpg') no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('./apples/11.jpg') no-repeat;
     background-size: cover;
     min-width: 100%;
     min-height: 100%;
@@ -57,9 +57,4 @@
 
 .cover {
     height: 100vh;
-}
-
-.middle {
-    position: absolute;
-    translate: translateY(-50%);
 }

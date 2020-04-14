@@ -50,11 +50,12 @@ export default function Blog() {
   return (
     <div class="Activity">
       <React.Fragment>
+        <CssBaseline />
         <Container maxWidth="lg">
           <Header title="Local Orchards" sections={sections} />
           <main>
             <MainFeaturedPost post={mainFeaturedPost} />
-            <Grid container spacing={4}>
+            <Grid container spacing={2}>
               {posts.map((post) => (
                 <Post key={post.title} post={post} />
               ))}

@@ -5,6 +5,14 @@ import Header from "./Header";
 import Footer from "./Footer";
 import "./components.css";
 import BusinessFrom from "./BusinessForm";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    backgroundColor: "white",
+  },
+}));
 
 const sections = [
   { title: "U-Pick", url: "/upick" },
@@ -14,6 +22,7 @@ const sections = [
 ];
 
 export default function SignUpPage() {
+  const classes = useStyles();
   return (
     <div class="SignUp">
       <React.Fragment>
@@ -21,9 +30,9 @@ export default function SignUpPage() {
         <Container maxWidth="lg">
           <Header title="Local Orchards" sections={sections} />
           <main>
-            <div>
+            <Paper className={classes.container}>
               <BusinessFrom />
-            </div>
+            </Paper>
           </main>
         </Container>
         <Footer
