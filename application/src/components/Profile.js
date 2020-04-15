@@ -82,6 +82,7 @@ export default function Profile() {
       let id = "ETuJfpm1TinVG6bQ4c3x";
       let arr = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       let p = arr.filter((post) => post.user === id);
+      p.sort((a, b) => b.sortBy - a.sortBy);
       setPosts(p);
     });
   };
