@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, Redirect } from "react-router";
+import { withRouter } from "react-router";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import firebase from "../firebase";
-import { AuthContext } from "../Auth.js";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -32,23 +32,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginForm = ({ history }) => {
+const SignUp = ({ history }) => {
   const classes = useStyles();
-  const [user, setUser] = React.useState({});
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-    console.log("You are submitting " + JSON.stringify(user));
-  };
-
-  const handleLogin = React.useCallback(
+  const handleSignUp = React.useCallback(
     async (event) => {
       event.preventDefault();
-      const { email, password } = event.target.elements;
+      const { email, password, firstName, lastName } = event.target.elements;
+      let user = {
+        email: email.value,
+        firstName: firstName.value,
+        lastName: lastName.value,
+      };
       try {
         await firebase.app
           .auth()
-          .signInWithEmailAndPassword(email.value, password.value);
+          .createUserWithEmailAndPassword(email.value, password.value);
+        firebase.db.collection("newusers").add(user);
         history.push("/profile");
       } catch (error) {
         alert(error);
@@ -56,18 +56,6 @@ const LoginForm = ({ history }) => {
     },
     [history]
   );
-
-  const { currentUser } = React.useContext(AuthContext);
-
-  if (currentUser) {
-    return <Redirect to="/profile" />;
-  }
-
-  const myChangeHandler = (event) => {
-    let nam = event.target.name;
-    let val = event.target.value;
-    setUser({ ...user, [nam]: val });
-  };
 
   return (
     <Container component="main">
@@ -77,21 +65,20 @@ const LoginForm = ({ history }) => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Login
+          Sign up
         </Typography>
-        <form className={classes.form} onSubmit={handleLogin} noValidate>
+        <form className={classes.form} onSubmit={handleSignUp}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                autoComplete="email"
-                name="email"
                 variant="outlined"
-                type="email"
+                type="text"
                 required
                 fullWidth
                 id="email"
-                label="Email"
-                onChange={myChangeHandler}
+                label="Email Address"
+                name="email"
+                autoComplete="email"
                 autoFocus
               />
             </Grid>
@@ -105,7 +92,30 @@ const LoginForm = ({ history }) => {
                 label="Password"
                 name="password"
                 autoComplete="current-password"
-                onChange={myChangeHandler}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="fname"
+                name="firstName"
+                variant="outlined"
+                type="text"
+                required
+                fullWidth
+                id="firstName"
+                label="First Name"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                type="text"
+                required
+                fullWidth
+                id="lastName"
+                label="Last Name"
+                name="lastName"
+                autoComplete="lname"
               />
             </Grid>
           </Grid>
@@ -116,12 +126,14 @@ const LoginForm = ({ history }) => {
             color="primary"
             className={classes.submit}
           >
-            Login
+            Sign Up
           </Button>
         </form>
+        <p>Already have a profile?</p>
+        <Link to="/profile">Log In</Link>
       </div>
     </Container>
   );
 };
 
-export default withRouter(LoginForm);
+export default withRouter(SignUp);

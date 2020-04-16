@@ -5,7 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import db from "../firebase";
+import firebase from "../firebase";
 import Post from "./Post";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
@@ -123,7 +123,8 @@ export default function Orchard({ match }) {
   const [posts, setPosts] = React.useState([]);
 
   const fetchOrchards = async () => {
-    db.collection("users")
+    firebase.db
+      .collection("users")
       .doc(match.params.id)
       .get()
       .then((doc) => {
@@ -132,7 +133,7 @@ export default function Orchard({ match }) {
   };
 
   const fetchPosts = async () => {
-    db.collection("posts").onSnapshot(function (data) {
+    firebase.db.collection("posts").onSnapshot(function (data) {
       let id = match.params.id;
       let arr = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       let p = arr.filter((post) => post.user === id);
@@ -141,7 +142,7 @@ export default function Orchard({ match }) {
   };
 
   return (
-    <div>
+    <div className="Profile">
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="lg">

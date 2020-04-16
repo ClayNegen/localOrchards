@@ -7,7 +7,7 @@ import Header from "./Header";
 import MainFeaturedPost from "./MainFeaturedPost";
 import Footer from "./Footer";
 import Post from "./Post";
-import db from "../firebase";
+import firebase from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -36,7 +36,7 @@ export default function Blog() {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      db.collection("posts").onSnapshot(function (data) {
+      firebase.db.collection("posts").onSnapshot(function (data) {
         let arr = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
         arr.sort((a, b) => b.sortBy - a.sortBy);
         console.log("Sorted Array: ", arr);

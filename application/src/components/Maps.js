@@ -11,7 +11,7 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import db from "../firebase";
+import firebase from "../firebase";
 
 const sections = [
   { title: "U-Pick", url: "/upick" },
@@ -36,7 +36,7 @@ export default function Maps() {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      db.collection("users").onSnapshot(function (data) {
+      firebase.db.collection("users").onSnapshot(function (data) {
         setPlaces(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       });
     };
@@ -91,12 +91,14 @@ export default function Maps() {
 }
 
 function Place(props) {
+  const classes = useStyles();
   return (
-    <Card>
+    <Card className={classes.map}>
       <CardActionArea onClick={props.callback}>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2"></Typography>
-          {props.title}
+          <Typography gutterBottom variant="h5" component="h2">
+            {props.title}
+          </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {props.des}
           </Typography>

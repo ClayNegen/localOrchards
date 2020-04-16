@@ -8,7 +8,7 @@ import MainFeaturedPost from "./MainFeaturedPost";
 import Footer from "./Footer";
 import Business from "./Business";
 import { Link } from "react-router-dom";
-import db from "../firebase";
+import firebase from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -37,7 +37,7 @@ export default function Upick() {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      db.collection("users").onSnapshot(function (data) {
+      firebase.db.collection("users").onSnapshot(function (data) {
         setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       });
     };

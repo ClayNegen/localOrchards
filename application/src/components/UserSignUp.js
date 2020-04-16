@@ -4,7 +4,7 @@ import Container from "@material-ui/core/Container";
 import Header from "./Header";
 import Footer from "./Footer";
 import "./components.css";
-import BusinessForm from "./BusinessForm";
+import UserForm from "./UserForm";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 
@@ -31,7 +31,7 @@ export default function SignUpPage() {
           <Header title="Local Orchards" sections={sections} />
           <main>
             <Paper className={classes.container}>
-              <BusinessForm />
+              <UserForm />
             </Paper>
           </main>
         </Container>

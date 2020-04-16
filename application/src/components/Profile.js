@@ -4,12 +4,16 @@ import Container from "@material-ui/core/Container";
 import Header from "./Header";
 import Footer from "./Footer";
 import "./components.css";
-import db from "../firebase";
+import firebase from "../firebase";
 import { Button } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 import Post from "./Post";
 
 const sections = [
@@ -34,11 +38,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Profile() {
-  const id = "ETuJfpm1TinVG6bQ4c3x";
   const classes = useStyles();
   const date = new Date();
+  const [Id, setId] = React.useState("ETuJfpm1TinVG6bQ4c3x");
   const [post, setPost] = React.useState({
-    user: id,
+    user: Id,
     date: date.toDateString(),
     sortBy: date.getTime(),
   });
@@ -50,7 +54,7 @@ export default function Profile() {
     document.getElementById("post").value = "";
     if (post.content) {
       console.log("You are submitting " + post);
-      db.collection("posts").add(post);
+      firebase.db.collection("posts").add(post);
     } else {
       console.log("Enter a post!");
     }
@@ -63,13 +67,33 @@ export default function Profile() {
   };
 
   React.useEffect(() => {
+    fetchUsers();
     fetchData();
     fetchPosts();
   }, []);
 
+  const checkId = async (email, id) => {
+    console.log("Email:", email);
+    if (email === firebase.app.auth().currentUser.email) {
+      setId(id);
+    }
+  };
+
+  const fetchUsers = async () => {
+    firebase.db
+      .collection("users")
+      .get()
+      .then((data) => {
+        data.docs.forEach((doc) => {
+          checkId(doc.data().email, doc.id);
+        });
+      });
+  };
+
   const fetchData = async () => {
-    db.collection("users")
-      .doc(id)
+    firebase.db
+      .collection("users")
+      .doc(Id)
       .get()
       .then((doc) => {
         setCurrentUser(doc.data());
@@ -78,7 +102,7 @@ export default function Profile() {
   };
 
   const fetchPosts = async () => {
-    db.collection("posts").onSnapshot(function (data) {
+    firebase.db.collection("posts").onSnapshot(function (data) {
       let id = "ETuJfpm1TinVG6bQ4c3x";
       let arr = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       let p = arr.filter((post) => post.user === id);
@@ -87,6 +111,12 @@ export default function Profile() {
     });
   };
 
+  const signOut = () => {
+    firebase.app.auth().signOut();
+    console.log("Signed Out");
+  };
+
+  console.log("id: ", Id);
   return (
     <div class="Profile">
       <React.Fragment>
@@ -96,6 +126,22 @@ export default function Profile() {
           <main>
             <h1>Your Profile</h1>
             <ProfileList item={currentUser} />
+            <Grid container spacing={2}>
+              <Grid item xs={2}>
+                <Card>
+                  <CardActionArea onClick={signOut}>
+                    <Typography
+                      gutterBottom
+                      variant="h6"
+                      component="h2"
+                      style={{ textAlign: "center" }}
+                    >
+                      Log Out
+                    </Typography>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            </Grid>
             <h1>Business</h1>
             <BusinessList item={currentUser} />
           </main>

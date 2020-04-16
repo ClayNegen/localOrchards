@@ -5,6 +5,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import "./components.css";
 import Typography from "@material-ui/core/Typography";
+import firebase from "../firebase";
 
 const sections = [
   { title: "U-Pick", url: "/upick" },
@@ -14,14 +15,19 @@ const sections = [
 ];
 
 export default function Home() {
+  const signOut = () => {
+    //firebase.app.auth().signOut();
+    console.log("poop");
+  };
+
   return (
-    <div class="Home">
+    <div className="Home">
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="lg">
           <Header title="Local Orchards" sections={sections} />
           <main>
-            <div class="cover"></div>
+            <div className="cover"></div>
           </main>
         </Container>
         <Footer

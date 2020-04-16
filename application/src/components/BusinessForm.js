@@ -8,7 +8,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import db from "../firebase";
+import firebase from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,7 +37,7 @@ export default function SignUp() {
   const onSubmit = (event) => {
     event.preventDefault();
     console.log("You are submitting " + user);
-    db.collection("users").add(user);
+    firebase.db.collection("users").add(user);
   };
 
   const myChangeHandler = (event) => {
@@ -54,7 +54,7 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Create A Business
         </Typography>
         <form className={classes.form} onSubmit={onSubmit} noValidate>
           <Grid container spacing={2}>

@@ -1,7 +1,9 @@
 import { Credentials } from "./config";
+import "firebase/auth";
 const firebase = require("firebase");
 // Required for side-effects
 require("firebase/firestore");
+require("firebase/app");
 
 const firebaseConfig = {
   apiKey: Credentials[0].FireBaseKey,
@@ -14,7 +16,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase and Firestore
-firebase.initializeApp(firebaseConfig);
-var db = firebase.firestore();
+const app = firebase.initializeApp(firebaseConfig);
+var db = app.firestore();
 
-export default db;
+export default { db, app };

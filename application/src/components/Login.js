@@ -21,7 +21,7 @@ const sections = [
   { title: "Profile", url: "/profile" },
 ];
 
-export default function SignUpPage() {
+export default function LoginPage() {
   const classes = useStyles();
   return (
     <div class="SignUp">
