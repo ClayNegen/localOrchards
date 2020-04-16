@@ -4,6 +4,8 @@ Honors Senior Project at GVSU winter 2020
 
 Journal: https://github.com/ClayNegen/localOrchards/wiki/Journal
 
+Live Version: https://localorchards.netlify.com
+
 # Getting Started
 
 In order to run the app, change directories into /application and run 'npm install'. When this is finished, run 'npm start' and you are good to go!
