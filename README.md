@@ -1,10 +1,5 @@
-# localOrchards
-
-Honors Senior Project at GVSU winter 2020
-
-Journal: https://github.com/ClayNegen/localOrchards/wiki/Journal
-
-Live Version: https://localorchards.netlify.com
+# Visit Live At:
+https://localorchards.netlify.com
 
 # Getting Started
 
@@ -12,26 +7,27 @@ In order to run the app, change directories into /application and run 'npm insta
 
 # Tooling:
 
-### Database:
+JavaSript
+Node.js
+React.js
 
+### Database:
 Fire Base
 
-### Framework:
-
-React JS
+### UserAuthentication:
+Fire Base
 
 ### Component Styling:
-
 Material UI
 
-## Wire Frames
+### Maps:
+Google Maps JavaScript API
+Google Maps Geodecoding Service
 
-![](./application/WireFrames/TitlePage1.png)
+# localOrchards
 
-#
+Honors Senior Project at GVSU winter 2020
 
-![](./application/WireFrames/TitlePage2.png)
+Journal: https://github.com/ClayNegen/localOrchards/wiki/Journal
 
-#
-
-![](./application/WireFrames/TitlePage3.png)
+Live Version: https://localorchards.netlify.com
